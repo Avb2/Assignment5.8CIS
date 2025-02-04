@@ -7,4 +7,121 @@
     android:layout_height="match_parent"
     tools:context=".Ratings">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Ratings"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <RatingBar
+            android:id="@+id/easeOfCheckoutRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="357dp" />
+
+        <TextView
+            android:id="@+id/produceTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Produce Department"
+            tools:layout_editor_absoluteX="140dp"
+            tools:layout_editor_absoluteY="110dp" />
+
+        <TextView
+            android:id="@+id/cheeseTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cheese Selection"
+            tools:layout_editor_absoluteX="151dp"
+            tools:layout_editor_absoluteY="262dp" />
+
+        <RatingBar
+            android:id="@+id/liquorRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="53dp" />
+
+        <RatingBar
+            android:id="@+id/produceRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="129dp" />
+
+        <TextView
+            android:id="@+id/meatTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Meat Department"
+            tools:layout_editor_absoluteX="150dp"
+            tools:layout_editor_absoluteY="186dp" />
+
+        <RatingBar
+            android:id="@+id/ratingBar3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="83dp"
+            tools:layout_editor_absoluteY="205dp" />
+
+        <RatingBar
+            android:id="@+id/cheeseRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="85dp"
+            tools:layout_editor_absoluteY="281dp" />
+
+        <TextView
+            android:id="@+id/easeOfCheckoutTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ease of Checkout"
+            tools:layout_editor_absoluteX="150dp"
+            tools:layout_editor_absoluteY="338dp" />
+
+        <Button
+            android:id="@+id/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            tools:layout_editor_absoluteX="160dp"
+            tools:layout_editor_absoluteY="414dp" />
+
+        <TextView
+            android:id="@+id/avgRatingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Average Rating:"
+            tools:layout_editor_absoluteX="156dp"
+            tools:layout_editor_absoluteY="479dp" />
+
+        <TextView
+            android:id="@+id/ratingOutputTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:layout_editor_absoluteX="205dp"
+            tools:layout_editor_absoluteY="517dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/backNavButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:rotation="-90"
+            app:srcCompat="@android:drawable/arrow_up_float"
+            tools:layout_editor_absoluteX="177dp"
+            tools:layout_editor_absoluteY="659dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/liquorTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Liquor Store"
+        tools:layout_editor_absoluteX="167dp"
+        tools:layout_editor_absoluteY="32dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
