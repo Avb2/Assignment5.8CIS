@@ -1,7 +1,10 @@
 package com.example.supermarket;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -9,7 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,9 +32,21 @@ public class MainActivity extends AppCompatActivity {
     public void rateButton(){
         findViewById(R.id.rateButton).setOnClickListener(
                 l -> {
-                    startActivity(new Intent(MainActivity.this, Ratings.class));
+                    Intent intent = new Intent(MainActivity.this, Ratings.class);
 
+                    String name = findViewById(R.id.nameEditText).toString();
+
+                    String address = findViewById(R.id.addressEditText).toString();
+
+
+                    intent.putExtra("name", name);
+                    intent.putExtra("address", address);
+
+                    startActivity(intent);
                 }
         );
     }
+
+
+
 }
