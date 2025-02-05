@@ -158,14 +158,17 @@
             android:id="@+id/ratingOutputTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="205dp"
-            android:layout_marginTop="600dp"
-            android:layout_marginEnd="206dp"
-            android:layout_marginBottom="112dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="586dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="126dp"
+            android:text="0"
+            android:textAlignment="center"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/backNavButton"

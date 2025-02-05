@@ -13,108 +13,128 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import java.util.Locale;
+
 public class Ratings extends AppCompatActivity {
+
     private String name;
     private String address;
-
-    public Ratings (String name, String address) {
-        this.name = name;
-        this.address = address;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_ratings);
+
+        RatingBar easeOfCheckoutRatingBar = findViewById(R.id.easeOfCheckoutRatingBar);
+        RatingBar liquorRatingBar = findViewById(R.id.liquorRatingBar);
+        RatingBar produceRatingBar = findViewById(R.id.produceRatingBar);
+        RatingBar cheeseRatingBar = findViewById(R.id.cheeseRatingBar);
+        RatingBar ratingBar3 = findViewById(R.id.ratingBar3);
+
+        TextView ratingOutputTextView = findViewById(R.id.ratingOutputTextView);
+
+        RatingBar.OnRatingBarChangeListener ratingBarChangeListener = new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                updateAverageRating(ratingOutputTextView);
+            }
+        };
+
+        easeOfCheckoutRatingBar.setOnRatingBarChangeListener(ratingBarChangeListener);
+        liquorRatingBar.setOnRatingBarChangeListener(ratingBarChangeListener);
+        produceRatingBar.setOnRatingBarChangeListener(ratingBarChangeListener);
+        cheeseRatingBar.setOnRatingBarChangeListener(ratingBarChangeListener);
+        ratingBar3.setOnRatingBarChangeListener(ratingBarChangeListener);
+
+        updateAverageRating(ratingOutputTextView);
+
+        Intent intent = getIntent();
+        name = intent.getStringExtra("name");
+        address = intent.getStringExtra("address");
+
         loadPrefs();
-
-
-
         navigateHomeButton();
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+
+        findViewById(R.id.saveButton).setOnClickListener(l -> savePrefs());
     }
 
+    private void updateAverageRating(TextView ratingOutputTextView) {
+        RatingBar easeOfCheckoutRatingBar = findViewById(R.id.easeOfCheckoutRatingBar);
+        RatingBar liquorRatingBar = findViewById(R.id.liquorRatingBar);
+        RatingBar produceRatingBar = findViewById(R.id.produceRatingBar);
+        RatingBar cheeseRatingBar = findViewById(R.id.cheeseRatingBar);
+        RatingBar ratingBar3 = findViewById(R.id.ratingBar3);
+
+        float totalRating = easeOfCheckoutRatingBar.getRating() + liquorRatingBar.getRating() +
+                produceRatingBar.getRating() + cheeseRatingBar.getRating() + ratingBar3.getRating();
+        float averageRating = totalRating / 5;
+
+        ratingOutputTextView.setText(String.format("%.1f", averageRating));
+    }
 
 
     public void savePrefs() {
         TextView output = findViewById(R.id.ratingOutputTextView);
-        SharedPreferences prefs = getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(this.name, Context.MODE_PRIVATE);
 
         prefs.edit().putString("name", name).apply();
         prefs.edit().putString("address", address).apply();
 
-        // produce
         RatingBar produceBar = findViewById(R.id.produceRatingBar);
-        float produceNum = produceBar.getNumStars();
+        float produceNum = produceBar.getRating();
         prefs.edit().putFloat("produce", produceNum).apply();
 
-        // meat
         RatingBar meatBar = findViewById(R.id.ratingBar3);
-        float meatNum = meatBar.getNumStars();
+        float meatNum = meatBar.getRating();
         prefs.edit().putFloat("meat", meatNum).apply();
 
-        // liquor
         RatingBar liquorBar = findViewById(R.id.liquorRatingBar);
-        float liquorNum = liquorBar.getNumStars();
+        float liquorNum = liquorBar.getRating();
         prefs.edit().putFloat("liquor", liquorNum).apply();
 
-        // cheese
         RatingBar cheeseBar = findViewById(R.id.cheeseRatingBar);
-        float cheeseNum = cheeseBar.getNumStars();
+        float cheeseNum = cheeseBar.getRating();
         prefs.edit().putFloat("cheese", cheeseNum).apply();
 
-        // checkout
         RatingBar checkoutBar = findViewById(R.id.easeOfCheckoutRatingBar);
-        float checkoutNum = checkoutBar.getNumStars();
+        float checkoutNum = checkoutBar.getRating();
         prefs.edit().putFloat("checkout", checkoutNum).apply();
 
-        double avg = produceNum + meatNum + liquorNum + cheeseNum + checkoutNum / 5.0;
-        output.setText(String.valueOf(avg));
+        double avg = (produceNum + meatNum + liquorNum + cheeseNum + checkoutNum) / 5.0;
+        prefs.edit().putFloat("avg", (float) avg).apply();
+
+        output.setText(String.format(Locale.getDefault(), "%.2f", avg));
 
     }
 
     public void loadPrefs() {
         TextView output = findViewById(R.id.ratingOutputTextView);
-        SharedPreferences prefs = getSharedPreferences(name, Context.MODE_PRIVATE);
+        SharedPreferences prefs = getSharedPreferences(this.name, Context.MODE_PRIVATE);
 
-        // produce
         RatingBar produceBar = findViewById(R.id.produceRatingBar);
-        prefs.getFloat("produce", 0);
+        produceBar.setRating(prefs.getFloat("produce", 0));
 
-        // meat
         RatingBar meatBar = findViewById(R.id.ratingBar3);
-        prefs.getFloat("meat", 0);
+        meatBar.setRating(prefs.getFloat("meat", 0));
 
-        // liquor
         RatingBar liquorBar = findViewById(R.id.liquorRatingBar);
-        prefs.getFloat("liquor", 0);
+        liquorBar.setRating(prefs.getFloat("liquor", 0));
 
-        // cheese
         RatingBar cheeseBar = findViewById(R.id.cheeseRatingBar);
-        prefs.getFloat("cheese", 0);
+        cheeseBar.setRating(prefs.getFloat("cheese", 0));
 
-        // checkout
         RatingBar checkoutBar = findViewById(R.id.easeOfCheckoutRatingBar);
-        prefs.getFloat("checkout", 0);
+        checkoutBar.setRating(prefs.getFloat("checkout", 0));
 
         float avg = prefs.getFloat("avg", 0);
-        output.setText(String.valueOf(avg));
+        output.setText(String.format(Locale.getDefault(), "%.2f", avg));
 
     }
 
-
-
     private void navigateHomeButton() {
-
         findViewById(R.id.backNavButton).setOnClickListener(
                 l -> {
                     Intent intent = new Intent(Ratings.this, MainActivity.class);
-
                     startActivity(intent);
                 }
         );

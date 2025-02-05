@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -28,16 +29,13 @@ public class MainActivity extends AppCompatActivity{
         });
     }
 
-
     public void rateButton(){
         findViewById(R.id.rateButton).setOnClickListener(
                 l -> {
                     Intent intent = new Intent(MainActivity.this, Ratings.class);
 
-                    String name = findViewById(R.id.nameEditText).toString();
-
-                    String address = findViewById(R.id.addressEditText).toString();
-
+                    String name = ((EditText) findViewById(R.id.nameEditText)).getText().toString();
+                    String address = ((EditText) findViewById(R.id.addressEditText)).getText().toString();
 
                     intent.putExtra("name", name);
                     intent.putExtra("address", address);
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity{
                 }
         );
     }
-
-
-
 }
+
+
